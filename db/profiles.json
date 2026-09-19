@@ -1,0 +1,18 @@
+{
+  "local": {
+    "host": "localhost",
+    "port": 5432,
+    "database": "TEST",
+    "user": "postgres",
+    "password": "1234",
+    "sslmode": "prefer"
+  },
+  "neon": {
+    "host": "ep-lucky-pine-b4moh6wp-pooler.c-6.us-east-2.aws.neon.tech",
+    "port": 5432,
+    "database": "neondb",
+    "user": "neondb_owner",
+    "password": "npg_T7EktyDSN3Aa",
+    "sslmode": "require"
+  }
+}

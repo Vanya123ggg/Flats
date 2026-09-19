@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Отчёты по рынку — Рынок недвижимости</title>
+  <link rel="stylesheet" href="../../../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../../index.html">Рынок недвижимости</a>
+      <nav class="main-nav">
+        <a class="nav-link nav-link-soon" href="../../../residential/index.html">Жилая недвижимость <span class="badge-soon">Скоро</span></a>
+        <a class="nav-link nav-link-soon" href="../../../commercial/index.html">Коммерческая недвижимость <span class="badge-soon">Скоро</span></a>
+        <a class="nav-link nav-link-active" href="index.html">Земельные участки</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="crumbs"><a href="index.html">Земельные участки</a> / Отчёты по рынку</div>
+    <div class="page-head">
+      <h1>Отчёты по рынку</h1>
+      <p class="page-sub">Показатели считаются по цене за сотку за выбранный период и сравниваются с таким же периодом год раньше. Всего в базе: <span class="hl" id="total-count">—</span> объявлений.</p>
+    </div>
+
+    <div class="content-grid">
+      <div class="content-main">
+
+        <section class="card" aria-label="Параметры отчёта">
+          <div class="flex-between">
+            <h2 class="section-title">Параметры отчёта</h2>
+            <p class="section-note">показатели — цена за сотку, ₽</p>
+          </div>
+          <form class="filter-form" id="filter-form">
+            <div class="filter-row">
+              <div class="field">
+                <label class="field-label" for="f-start">Начало периода</label>
+                <input class="inp" type="date" id="f-start" required>
+              </div>
+              <div class="field">
+                <label class="field-label" for="f-end">Конец периода</label>
+                <input class="inp" type="date" id="f-end" required>
+              </div>
+              <div class="field">
+                <label class="field-label" for="f-interval">Интервал</label>
+                <select class="inp" id="f-interval">
+                  <option value="month">По месяцам</option>
+                  <option value="quarter" selected>По кварталам</option>
+                </select>
+              </div>
+              <div class="field">
+                <label class="field-label" for="f-region">Регион</label>
+                <select class="inp" id="f-region"></select>
+              </div>
+              <div class="filter-actions">
+                <button type="submit" class="btn btn-primary">Сформировать</button>
+              </div>
+            </div>
+            <div class="presets" id="presets"></div>
+            <p class="report-error" id="report-error"></p>
+          </form>
+        </section>
+
+        <section class="card" aria-label="Данные за выбранный период" style="margin-top:22px;">
+          <div class="flex-between">
+            <h2 class="section-title">Данные за выбранный период</h2>
+            <p class="section-note" id="report-note">—</p>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th id="period-col">Период</th>
+                  <th class="num">Объявлений</th>
+                  <th class="num">Средняя за сотку, ₽</th>
+                  <th class="num">Медианная за сотку, ₽</th>
+                  <th class="num">Максимум за сотку, ₽</th>
+                  <th class="num">Минимум за сотку, ₽</th>
+                </tr>
+              </thead>
+              <tbody id="report-body"></tbody>
+            </table>
+          </div>
+          <h3 class="summary-sub">Сводка по секторам (площадь)</h3>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Сектор</th>
+                  <th class="num">Объявлений</th>
+                  <th class="num">Средняя за сотку, ₽</th>
+                  <th class="num">Медианная за сотку, ₽</th>
+                  <th class="num">Максимум за сотку, ₽</th>
+                  <th class="num">Минимум за сотку, ₽</th>
+                </tr>
+              </thead>
+              <tbody id="segs-body"></tbody>
+            </table>
+          </div>
+          <p class="table-note">▲ / ▼ — изменение относительно того же периода годом раньше; «—» — данных нет: в периоде нет объявлений либо нет объявлений за такой же период годом раньше.</p>
+        </section>
+
+        <section class="card" aria-label="Тот же период год назад" style="margin-top:22px;">
+          <div class="flex-between">
+            <h2 class="section-title">Тот же период год назад</h2>
+            <p class="section-note" id="prev-note">—</p>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Период</th>
+                  <th class="num">Объявлений</th>
+                  <th class="num">Средняя за сотку, ₽</th>
+                  <th class="num">Медианная за сотку, ₽</th>
+                  <th class="num">Максимум за сотку, ₽</th>
+                  <th class="num">Минимум за сотку, ₽</th>
+                </tr>
+              </thead>
+              <tbody id="prev-body"></tbody>
+            </table>
+          </div>
+          <h3 class="summary-sub">Сводка по секторам (площадь)</h3>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Сектор</th>
+                  <th class="num">Объявлений</th>
+                  <th class="num">Средняя за сотку, ₽</th>
+                  <th class="num">Медианная за сотку, ₽</th>
+                  <th class="num">Максимум за сотку, ₽</th>
+                  <th class="num">Минимум за сотку, ₽</th>
+                </tr>
+              </thead>
+              <tbody id="prev-segs"></tbody>
+            </table>
+          </div>
+          <p class="table-note">▲ / ▼ — изменение относительно того же периода годом раньше; «—» — данных нет: в периоде нет объявлений либо нет объявлений за такой же период годом раньше.</p>
+        </section>
+
+        <section class="card" aria-label="Диаграмма" style="margin-top:22px;">
+          <div class="flex-between">
+            <h2 class="section-title">Диаграмма</h2>
+            <div class="btn-group" id="chart-metric">
+              <button class="btn btn-ghost btn-sm active" type="button" data-metric="avg">Цена за сотку</button>
+              <button class="btn btn-ghost btn-sm" type="button" data-metric="med">Медиана</button>
+            </div>
+          </div>
+          <p class="section-note">выбранный период — сплошная линия, такой же период год назад — на фоне</p>
+          <div class="chart-wrap" id="period-chart"></div>
+        </section>
+
+      </div>
+
+      <aside class="sidebar">
+        <div class="card">
+          <nav class="side-nav">
+            <div class="side-head">Отчёты</div>
+            <a class="side-active" href="index.html">Отчёты по рынку</a>
+            <a class="side-back" href="../../index.html">Подбор аналогов по заданной локации</a>
+          </nav>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>© 2026 Рынок недвижимости — аналитика объявлений</span>
+      <span>MVP. Данные собираются автоматически из открытых источников.</span>
+    </div>
+  </footer>
+
+  <script src="../../../js/vendor/chart.umd.min.js"></script>
+  <script src="../../../js/data.js"></script>
+  <script src="../../../js/common.js"></script>
+  <script src="../../../js/report-quarterly.js"></script>
+  <script src="../../../js/live.js"></script>
+</body>
+</html>

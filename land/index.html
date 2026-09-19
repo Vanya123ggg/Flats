@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Земельные участки — Рынок недвижимости</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">Рынок недвижимости</a>
+      <nav class="main-nav">
+        <a class="nav-link nav-link-soon" href="../residential/index.html">Жилая недвижимость <span class="badge-soon">Скоро</span></a>
+        <a class="nav-link nav-link-soon" href="../commercial/index.html">Коммерческая недвижимость <span class="badge-soon">Скоро</span></a>
+        <a class="nav-link nav-link-active" href="report/quarterly/index.html">Земельные участки</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="page-head">
+      <h1>Земельные участки</h1>
+      <p class="page-sub">Объявления собираются автоматически с Авито и Циана. Данные в базе: <span class="hl" id="total-count">—</span>. Перед принятием решений проверяйте актуальность на источнике.</p>
+    </div>
+
+    <section class="card" aria-label="Фильтры">
+      <form class="filter-form" id="filter-form">
+        <div class="filter-row">
+          <div class="field">
+            <span class="field-label">Район</span>
+            <select class="inp" id="f-district">
+              <option value="">Все районы</option>
+            </select>
+          </div>
+          <div class="field">
+            <span class="field-label">Категория земель</span>
+            <select class="inp" id="f-category">
+              <option value="">Все категории</option>
+            </select>
+          </div>
+          <div class="field">
+            <span class="field-label">ВРИ</span>
+            <select class="inp" id="f-vri">
+              <option value="">Все ВРИ</option>
+            </select>
+          </div>
+        </div>
+        <div class="filter-row">
+          <div class="field">
+            <span class="field-label">Площадь, соток</span>
+            <span class="range">
+              <input class="inp" id="f-area-from" type="number" min="0" step="any" placeholder="от">
+              <span class="range-sep">—</span>
+              <input class="inp" id="f-area-to" type="number" min="0" step="any" placeholder="до">
+            </span>
+          </div>
+          <div class="field">
+            <span class="field-label">Цена, руб.</span>
+            <span class="range">
+              <input class="inp" id="f-price-from" type="number" min="0" step="any" placeholder="от">
+              <span class="range-sep">—</span>
+              <input class="inp" id="f-price-to" type="number" min="0" step="any" placeholder="до">
+            </span>
+          </div>
+          <div class="filter-actions">
+            <button type="submit" class="btn btn-primary">Найти</button>
+            <button type="reset" class="btn btn-ghost">Сбросить</button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <div class="content-grid">
+      <div class="content-main">
+
+        <section class="card" aria-label="Сводка по найденному">
+          <div class="flex-between">
+            <h2 class="section-title">Сводка по найденному</h2>
+            <p class="section-note">Найдено: <span class="hl" id="met-count">0</span> <span id="met-count-word">объявлений</span></p>
+          </div>
+
+          <h3 class="summary-sub">Общая информация</h3>
+          <div class="stat-list">
+            <div class="stat-line stat-total">
+              <span class="stat-key">Найдено объектов</span>
+              <span class="dot"></span>
+              <span class="stat-val stat-val-total" id="met-total">0</span>
+            </div>
+            <div class="stat-line">
+              <span class="stat-key">Минимальная цена за сотку</span>
+              <span class="dot"></span>
+              <span class="stat-val" id="met-min">—</span>
+            </div>
+            <div class="stat-line">
+              <span class="stat-key">Максимальная цена за сотку</span>
+              <span class="dot"></span>
+              <span class="stat-val" id="met-max">—</span>
+            </div>
+            <div class="stat-line">
+              <span class="stat-key">Средняя цена за сотку</span>
+              <span class="dot"></span>
+              <span class="stat-val" id="met-avg">—</span>
+            </div>
+            <div class="stat-line">
+              <span class="stat-key">Медианная цена за сотку</span>
+              <span class="dot"></span>
+              <span class="stat-val" id="met-med">—</span>
+            </div>
+          </div>
+
+          <h3 class="summary-sub">По сегментам</h3>
+          <div class="stat-list stat-list-seg">
+            <div class="stat-seg-title">До 30 соток <span class="stat-seg-count">(<span id="seg1-count">0</span> объектов)</span></div>
+            <div class="stat-line">
+              <span class="stat-key">Минимальная цена за сотку</span>
+              <span class="dot"></span>
+              <span class="stat-val" id="seg1-min">—</span>
+            </div>
+            <div class="stat-line">
+              <span class="stat-key">Максимальная цена за сотку</span>
+              <span class="dot"></span>
+              <span class="stat-val" id="seg1-max">—</span>
+            </div>
+            <div class="stat-line">
+              <span class="stat-key">Средняя цена за сотку</span>
+              <span class="dot"></span>
+              <span class="stat-val" id="seg1-avg">—</span>
+            </div>
+            <div class="stat-line">
+              <span class="stat-key">Медианная цена за сотку</span>
+              <span class="dot"></span>
+              <span class="stat-val" id="seg1-med">—</span>
+            </div>
+          </div>
+          <div class="stat-list stat-list-seg">
+            <div class="stat-seg-title">От 30 до 50 соток <span class="stat-seg-count">(<span id="seg2-count">0</span> объектов)</span></div>
+            <div class="stat-line">
+              <span class="stat-key">Минимальная цена за сотку</span>
+              <span class="dot"></span>
+              <span class="stat-val" id="seg2-min">—</span>
+            </div>
+            <div class="stat-line">
+              <span class="stat-key">Максимальная цена за сотку</span>
+              <span class="dot"></span>
+              <span class="stat-val" id="seg2-max">—</span>
+            </div>
+            <div class="stat-line">
+              <span class="stat-key">Средняя цена за сотку</span>
+              <span class="dot"></span>
+              <span class="stat-val" id="seg2-avg">—</span>
+            </div>
+            <div class="stat-line">
+              <span class="stat-key">Медианная цена за сотку</span>
+              <span class="dot"></span>
+              <span class="stat-val" id="seg2-med">—</span>
+            </div>
+          </div>
+          <div class="stat-list stat-list-seg">
+            <div class="stat-seg-title">Свыше 50 соток <span class="stat-seg-count">(<span id="seg3-count">0</span> объектов)</span></div>
+            <div class="stat-line">
+              <span class="stat-key">Минимальная цена за сотку</span>
+              <span class="dot"></span>
+              <span class="stat-val" id="seg3-min">—</span>
+            </div>
+            <div class="stat-line">
+              <span class="stat-key">Максимальная цена за сотку</span>
+              <span class="dot"></span>
+              <span class="stat-val" id="seg3-max">—</span>
+            </div>
+            <div class="stat-line">
+              <span class="stat-key">Средняя цена за сотку</span>
+              <span class="dot"></span>
+              <span class="stat-val" id="seg3-avg">—</span>
+            </div>
+            <div class="stat-line">
+              <span class="stat-key">Медианная цена за сотку</span>
+              <span class="dot"></span>
+              <span class="stat-val" id="seg3-med">—</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="listings" aria-label="Объявления">
+          <div class="flex-between">
+            <h2 class="section-title">Объявления</h2>
+            <p class="section-note" id="list-note">—</p>
+          </div>
+          <div id="listings"></div>
+        </section>
+
+      </div>
+
+      <aside class="sidebar">
+        <div class="card">
+          <nav class="side-nav">
+            <div class="side-head">Отчёты</div>
+            <a href="report/quarterly/index.html">Отчёты по рынку</a>
+            <a class="side-back side-active" href="index.html">Подбор аналогов по заданной локации</a>
+          </nav>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>© 2026 Рынок недвижимости — аналитика объявлений</span>
+      <span>MVP. Данные собираются автоматически из открытых источников.</span>
+    </div>
+  </footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/land.js"></script>
+  <script src="../js/live.js"></script>
+</body>
+</html>
